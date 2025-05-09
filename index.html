@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bản đồ Tượng đài Cà Mau - NGUYEN TRONG NGUYEN - CK2202A14</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    h2 {
+      text-align: center;
+      margin: 20px 0;
+    }
+    #map {
+      height: 500px;
+      margin: 0 10px 20px 10px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Bản đồ Tượng đài Cà Mau</h2>
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  // Tọa độ Tượng đài Cà Mau (ước lượng gần đúng)
+  const tuongDaiCaMau = [9.176226, 105.150829];
+
+  // Khởi tạo bản đồ
+  const map = L.map('map').setView(tuongDaiCaMau, 17);
+
+  // Lớp tile
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Thêm Marker
+  const marker = L.marker(tuongDaiCaMau).addTo(map);
+  marker.bindPopup("Tượng đài Cà Mau").openPopup();
+
+  // Vẽ đường tròn bán kính 60m (đường kính 120m)
+  const circle = L.circle(tuongDaiCaMau, {
+    radius: 60, // bán kính (m)
+    color: 'red', // viền
+    fillColor: 'lightblue', // nền
+    fillOpacity: 0.4
+  }).addTo(map);
+</script>
+
+</body>
+</html>
