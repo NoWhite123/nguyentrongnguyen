@@ -32,28 +32,35 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  // Tọa độ Tượng đài Cà Mau (ước lượng gần đúng)
   const tuongDaiCaMau = [9.176226, 105.150829];
-
-  // Khởi tạo bản đồ
   const map = L.map('map').setView(tuongDaiCaMau, 17);
 
-  // Lớp tile
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
   }).addTo(map);
 
-  // Thêm Marker
   const marker = L.marker(tuongDaiCaMau).addTo(map);
   marker.bindPopup("Tượng đài Cà Mau").openPopup();
 
-  // Vẽ đường tròn bán kính 60m (đường kính 120m)
   const circle = L.circle(tuongDaiCaMau, {
-    radius: 60, // bán kính (m)
-    color: 'red', // viền
-    fillColor: 'lightblue', // nền
+    radius: 60,
+    color: 'red',
+    fillColor: 'lightblue',
     fillOpacity: 0.4
   }).addTo(map);
+
+  // Gắn popup cho vòng tròn
+  circle.bindPopup("Vòng tròn đường kính 120m quanh tượng đài");
+
+  // Hiển thị popup khi rê chuột vào
+  circle.on('mouseover', function (e) {
+    this.openPopup();
+  });
+
+  // Ẩn popup khi rời chuột ra
+  circle.on('mouseout', function (e) {
+    this.closePopup();
+  });
 </script>
 
 </body>
